@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:quizzler/Question.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 void main() => runApp(Quizzler());
 
@@ -25,6 +27,17 @@ class QuizPage extends StatefulWidget {
 }
 
 class _QuizPageState extends State<QuizPage> {
+  List<Icon> scoreKeeper = [];
+  List<Question> questionList = [
+    Question(q: 'You can lead a cow down stairs but not up stairs.', a: false),
+    Question(
+        q: 'Approximately one quarter of human bones are in the feet.',
+        a: true),
+    Question(q: 'A slug\'s blood is green.', a: true)
+  ];
+  int questionNum = 0;
+  int correctAnsNum = 0;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -37,7 +50,9 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                'This is where the question text will go.',
+                questionNum > questionList.length - 1
+                    ? questionList[0].question
+                    : questionList[questionNum].question,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
@@ -68,7 +83,31 @@ class _QuizPageState extends State<QuizPage> {
                   ),
                 ),
                 onPressed: () {
-                  //code here
+                  setState(() {
+                    if (questionNum <= questionList.length - 1) {
+                      if (questionList[questionNum].answer == true) {
+                        scoreKeeper.add(Icon(Icons.check, color: Colors.green));
+                        correctAnsNum++;
+                      } else {
+                        scoreKeeper.add(Icon(Icons.close, color: Colors.red));
+                      }
+                      questionNum++;
+                    } else {
+                      int score =
+                          (correctAnsNum * 100 / questionList.length).round();
+                      print(
+                          'You have reached end of the quiz. Your Score: $score%');
+                      Alert(
+                        context: context,
+                        title: "Alert!",
+                        desc:
+                            "You have reached end of the quiz. Your Score: $score%",
+                      ).show();
+                      scoreKeeper = [];
+                      questionNum = 0;
+                      correctAnsNum = 0;
+                    }
+                  });
                 },
               ),
             ),
@@ -95,12 +134,39 @@ class _QuizPageState extends State<QuizPage> {
                   ),
                 ),
                 onPressed: () {
-                  //playMusic(noteNum);
+                  setState(() {
+                    if (questionNum <= questionList.length - 1) {
+                      if (questionList[questionNum].answer == false) {
+                        scoreKeeper.add(Icon(Icons.check, color: Colors.green));
+                        correctAnsNum++;
+                      } else {
+                        scoreKeeper.add(Icon(Icons.close, color: Colors.red));
+                      }
+                      questionNum++;
+                    } else {
+                      int score =
+                          (correctAnsNum * 100 / questionList.length).round();
+                      print(
+                          'You have reached end of the quiz. Your Score: $score%');
+                      Alert(
+                        context: context,
+                        title: "Alert!",
+                        desc:
+                            "You have reached end of the quiz. Your Score: $score%",
+                      ).show();
+                      scoreKeeper = [];
+                      questionNum = 0;
+                      correctAnsNum = 0;
+                    }
+                  });
                 },
               ),
             ),
           ),
         ),
+        Row(
+          children: scoreKeeper,
+        )
         //TODO: Add a Row here as your score keeper
       ],
     );
