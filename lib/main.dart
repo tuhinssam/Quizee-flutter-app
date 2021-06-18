@@ -50,37 +50,54 @@ class _QuizPageState extends State<QuizPage> {
         Expanded(
           child: Padding(
             padding: EdgeInsets.all(15.0),
-            child: FlatButton(
-              textColor: Colors.white,
-              color: Colors.green,
-              child: Text(
-                'True',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20.0,
+            child: Container(
+              decoration: BoxDecoration(
+                  color: Colors.green,
+                  border: Border.all(
+                    color: Colors.greenAccent,
+                  ),
+                  borderRadius: BorderRadius.all(Radius.circular(40))),
+              //color: color,
+              width: double.infinity,
+              child: TextButton(
+                child: Text(
+                  'True',
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    color: Colors.white,
+                  ),
                 ),
+                onPressed: () {
+                  //code here
+                },
               ),
-              onPressed: () {
-                //The user picked true.
-              },
             ),
           ),
         ),
         Expanded(
           child: Padding(
             padding: EdgeInsets.all(15.0),
-            child: FlatButton(
-              color: Colors.red,
-              child: Text(
-                'False',
-                style: TextStyle(
-                  fontSize: 20.0,
-                  color: Colors.white,
+            child: Container(
+              decoration: BoxDecoration(
+                  color: Colors.red,
+                  border: Border.all(
+                    color: Colors.redAccent,
+                  ),
+                  borderRadius: BorderRadius.all(Radius.circular(40))),
+              //color: color,
+              width: double.infinity,
+              child: TextButton(
+                child: Text(
+                  'False',
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    color: Colors.white,
+                  ),
                 ),
+                onPressed: () {
+                  //playMusic(noteNum);
+                },
               ),
-              onPressed: () {
-                //The user picked false.
-              },
             ),
           ),
         ),
