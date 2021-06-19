@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:quizzler/Question.dart';
 import 'package:quizzler/QuizBrain.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
@@ -155,9 +154,3 @@ class _QuizPageState extends State<QuizPage> {
     );
   }
 }
-
-/*
-question1: 'You can lead a cow down stairs but not up stairs.', false,
-question2: 'Approximately one quarter of human bones are in the feet.', true,
-question3: 'A slug\'s blood is green.', true,
-*/
